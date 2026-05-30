@@ -91,9 +91,9 @@ int main(void)
 			{
 				if (i == 4 && j == 4)
 				{
-					int x = j * 128 + 64;
-					int y = i * 96 + 48;
-					draw_status(x, y);
+					int x = j * 128 + 64; //128 is column width (640/5) 64 is half of that
+					int y = i * 96 + 48; //96 is box height (480/5) divided by 2 is 48
+					draw_status(x, y); //these numbers make sure this prints to the center of the box
 				}
 				else if (game_logic.is_played(i, j)) {
 					int x = j * 128 + 64;
@@ -177,7 +177,7 @@ void get_mouse_input(int x, int y, logic& game_logic, int& first_row, int& first
 	int row = y / 96;
 	int col = x / 128;
 	if (row < 0 || row > 4 || col < 0 || col > 4) {
-		return;
+		return; //mouse input stays in grid
 	}
 	if (row == 4 && col == 4) {
 		game_logic.random_create(12);
@@ -188,13 +188,13 @@ void get_mouse_input(int x, int y, logic& game_logic, int& first_row, int& first
 		return; //reset bottom right
 	}
 	if (game_logic.is_played(row, col)) {
-		return;
+		return; //ignores matches boxes
 	}
 	if (first_row == -1 && first_column == -1)
 	{
 		first_row = row;
 		first_column = col;
-		draw_objects(col * 128 + 64, row * 96 + 48, row, col, game_logic);
+		draw_objects(col * 128 + 64, row * 96 + 48, row, col, game_logic); 
 		al_flip_display();
 		return;
 	}
