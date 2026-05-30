@@ -71,3 +71,6 @@ void logic::random_create(int num_shapes) {
 bool logic::finished() {
 	return false;
 }
+bool logic::is_played(int row, int col) {
+	return already_played[row][col];
+}

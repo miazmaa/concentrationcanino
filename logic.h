@@ -25,6 +25,7 @@ public:
 	void set_shape(int row, int col, Shape shape);
 	void random_create(int num_shapes);
 	bool finished();
+	bool is_played(int row, int col);
 
 private:
 	Shape pattern[5][5];
