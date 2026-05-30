@@ -33,7 +33,6 @@ int main(void)
 	int game_height = 480;
 	int first_row = -1, first_column = -1;
 	int second_row = -1, second_column = -1;
-
 	if (!al_init())
 	{
 		al_show_native_message_box(NULL, "Error!", "Allegro has failed to initialize.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
@@ -50,10 +49,16 @@ int main(void)
 		al_show_native_message_box(Screen, "Error!", "Failed to initialize the mouse!\n.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
 		return (-1);
 	}
+
 	al_init_primitives_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
-
+	ALLEGRO_FONT* bold = al_load_font("GROBOLD.ttf", 24, 0);
+	bold = al_load_ttf_font("GROBOLD.ttf", 20, 0);
+	if (!bold) {
+		al_show_native_message_box(Screen, "Error!", "Failed to load font.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
+		return (-1);
+	}
 	bool done = false;
 	bool matching = false;
 
@@ -103,7 +108,8 @@ int main(void)
 		if (second_row != -1 && second_column != -1) {
 			draw_objects(second_column * 128 + 64, second_row * 96 + 48, second_row, second_column, game_logic);
 		}
-
+		al_draw_filled_rectangle(0, game_height, width, height, al_map_rgb(200, 200, 200));
+		al_draw_text(bold, al_map_rgb(255, 255, 255), 20, game_height + 20, ALLEGRO_ALIGN_LEFT, "Press the rectangle to reset your game.");
 		al_flip_display();
 	}
 	al_destroy_event_queue(event_queue);
