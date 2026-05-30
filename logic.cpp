@@ -21,11 +21,12 @@ bool logic::compare(int row1, int col1, int row2, int col2) {
 	return false;
 }
 
-int logic::get_shape(int row, int col)
+Shape logic::get_shape(int row, int col)
 {
 	return pattern[row][col];
 }
-void logic::set_shape(int row, int col, int shape) {
+void logic::set_shape(int row, int col, Shape shape)
+{
 	pattern[row][col] = shape;
 }
 void logic::random_create(int num_shapes) {

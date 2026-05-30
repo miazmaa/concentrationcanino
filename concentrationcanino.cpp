@@ -8,6 +8,17 @@
 
 void set_graphics_x_o(int x, int y, logic& game_logic);
 void draw_grid(int width, int height);
+void draw_objects(int x, int y, int row, int col, logic& game_logic);
+void game_message(bool& gameover, logic& game_logic); //using for testing, ignore later
+void draw_circle(int x, int y);
+void draw_square(int x, int y);
+void draw_triangle(int x, int y);
+void draw_ellipse(int x, int y);
+void draw_diamond(int x, int y);
+void draw_filled_circle(int x, int y);
+void draw_rectangle(int x, int y);
+
+//all of these are from tic tac toe, delete later
 void draw_x(int x, int y);
 void draw_o(int x, int y);
 void game_message(bool& gameover, logic& game_logic);
@@ -94,8 +105,6 @@ int main(void)
 
 	return 0;
 }
-
-
 void draw_grid(int width, int game_height)
 {
 	float box_width = (float)width / 5.0f;
@@ -109,6 +118,58 @@ void draw_grid(int width, int game_height)
 		al_draw_line(x, 0, x, game_height, al_map_rgb(255, 255, 255), 2);
 	}
 }
+void draw_objects(int x, int y, int row, int col, logic& game_logic) {
+	Shape shape;
+	shape = game_logic.get_shape(row, col);
+
+	if (shape == CIRCLE) {
+		draw_circle(x, y);
+	}
+	else if (shape == SQUARE) {
+		draw_square(x, y);
+	}
+	else if (shape == TRIANGLE) {
+		draw_triangle(x, y);
+	}
+	else if (shape == ELLIPSE) {
+		draw_ellipse(x, y);
+	}
+	else if (shape == DIAMOND) {
+		draw_diamond(x, y);
+	}
+	else if (shape == FILLED_CIRCLE) {
+		draw_filled_circle(x, y);
+	}
+	if (row == 4 && col == 4)  //only for bottom right box
+	{
+		draw_rectangle(x, y);
+	}
+}
+
+//drawing shape functions, simple so moving them down
+void draw_circle(int x, int y) {
+	al_draw_circle(x, y, 10, al_map_rgb(255, 192, 203), 30);
+}
+void draw_square(int x, int y) { //NEEDS FIXING so it looks like a square
+	al_draw_filled_rectangle(x - 10, y + 30, x + 10, y - 30, al_map_rgb(0, 0, 255));
+}
+void draw_triangle(int x, int y) {
+	al_draw_filled_triangle(x, y - 20, x + 30, y - 20, x - 30, y, al_map_rgb(255, 0, 0));
+}
+void draw_ellipse(int x, int y) {
+	al_draw_filled_ellipse(x, y, 30, 20, al_map_rgb(255, 165, 0));
+}
+void draw_diamond(int x, int y) {
+	al_draw_filled_triangle(x, y - 35, x - 35, y, x + 35, y, al_map_rgb(255, 255, 0));
+	al_draw_filled_triangle(x, y + 35, x + 35, y, x - 35, y, al_map_rgb(255, 255, 0));
+}
+void draw_filled_circle(int x, int y) {
+	al_draw_filled_circle(x, y, 30, al_map_rgb(93, 63, 211));
+}
+void draw_rectangle(int x, int y) {
+	al_draw_filled_rectangle(x + 30, y - 10, x - 30, y + 10, al_map_rgb(0, 255, 0)); //only to be used for get_status()
+}
+//leftovers from tic tac toe, remove later
 void draw_x(int x, int y)
 {
 	al_draw_line(x - 106, y - 62, x + 106, y + 62, al_map_rgb(255, 0, 0), 2);
