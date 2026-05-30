@@ -240,7 +240,7 @@ void draw_line(int x, int y) {
 	al_draw_line(x + 20, y + 20, x, y, al_map_rgb(128, 128, 128), 5);
 }
 void draw_triangle(int x,int y) {
-	al_draw_triangle(x - 20, y, x + 30, y + 20, x - 30, y, al_map_rgb(64, 244, 212),5);
+	al_draw_triangle(x - 25, y, x + 25, y + 20, x, y, al_map_rgb(64, 244, 212),5);
 }
 void draw_bullet(int x, int y) {
 	al_draw_rectangle(x - 18, y - 18, x + 18, y + 18, al_map_rgb(70, 0, 70), 2);
