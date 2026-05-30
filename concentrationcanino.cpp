@@ -140,10 +140,6 @@ void draw_objects(int x, int y, int row, int col, logic& game_logic) {
 	else if (shape == FILLED_CIRCLE) {
 		draw_filled_circle(x, y);
 	}
-	if (row == 4 && col == 4)  //only for bottom right box
-	{
-		draw_rectangle(x, y);
-	}
 }
 
 //drawing shape functions, simple so moving them down
@@ -169,6 +165,7 @@ void draw_filled_circle(int x, int y) {
 void draw_rectangle(int x, int y) {
 	al_draw_filled_rectangle(x + 30, y - 10, x - 30, y + 10, al_map_rgb(0, 255, 0)); //only to be used for get_status()
 }
+
 //leftovers from tic tac toe, remove later
 void draw_x(int x, int y)
 {
