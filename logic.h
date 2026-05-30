@@ -7,7 +7,6 @@ enum Shape
 	ELLIPSE,
 	DIAMOND,
 	FILLED_CIRCLE,
-	RECTANGLE
 };
 class logic
 {

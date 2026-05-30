@@ -1,5 +1,6 @@
 #include"logic.h"
-
+#include <ctime>
+#include <cstdlib>
 logic::logic()
 {
 	clearGame();
@@ -30,7 +31,41 @@ void logic::set_shape(int row, int col, Shape shape)
 	pattern[row][col] = shape;
 }
 void logic::random_create(int num_shapes) {
+	clearGame();
+	srand(time(NULL)); 
+	Shape shapes[24];
+	int index = 0;
 
+	for (int i = 0; i < 12; i++) {
+		int shapeValue = (i % 6) + 1;
+
+		shapes[index] = (Shape)shapeValue;
+		index++;
+
+		shapes[index] = (Shape)shapeValue;
+		index++; //puts each shape in the array twice
+	}
+	for (int i = 23; i > 0; i--)
+	{
+		int j = rand() % (i + 1);
+
+		Shape temp = shapes[i];
+		shapes[i] = shapes[j];
+		shapes[j] = temp;
+	}
+	index = 0;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			if (i == 4 && j == 4) {
+				pattern[i][j] = NONE; //saves bottom right square for draw_status
+			}
+			else {
+				pattern[i][j] = shapes[index];
+				index++;
+			}
+			already_played[i][j] = false;
+		}
+	}
 
 }
 bool logic::finished() {

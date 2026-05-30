@@ -26,7 +26,8 @@ void turn_xo(int x, int y, int& turn, int boardx, int boardy, logic& game_logic)
 
 int main(void)
 {
-	logic  game_logic;
+	logic game_logic;
+	game_logic.random_create(12);
 	int posX = 0, posY = 0;
 	bool gameover = false;
 	ALLEGRO_DISPLAY* Screen = NULL;
@@ -67,6 +68,22 @@ int main(void)
 
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	draw_grid(width, game_height);
+	float box_width = width / 5.0f;
+	float box_height = game_height / 5.0f;
+
+	for (int row = 0; row < 5; row++)
+	{
+		for (int col = 0; col < 5; col++)
+		{
+			if (row == 4 && col == 4)
+				continue; //skip bottom right box
+
+			float x = col * box_width + box_width / 2;
+			float y = row * box_height + box_height / 2;
+
+			draw_objects(x, y, row, col, game_logic);
+		}
+	}
 	//game_message(gameover, game_logic);
 
 	al_flip_display();
@@ -89,6 +106,22 @@ int main(void)
 			}
 		}
 		draw_grid(width, game_height);
+		float box_width = width / 5.0f;
+		float box_height = game_height / 5.0f;
+
+		for (int row = 0; row < 5; row++)
+		{
+			for (int col = 0; col < 5; col++)
+			{
+				if (row == 4 && col == 4)
+					continue; 
+
+				float x = col * box_width + box_width / 2;
+				float y = row * box_height + box_height / 2;
+
+				draw_objects(x, y, row, col, game_logic);
+			}
+		}
 		game_message(gameover, game_logic);
 		if (draw)
 		{
