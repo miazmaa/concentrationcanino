@@ -37,7 +37,7 @@ void logic::random_create(int num_shapes) {
 	int index = 0;
 
 	for (int i = 0; i < 12; i++) {
-		int shapeValue = (i % 6) + 1;
+		int shapeValue = (i % 12) + 1;
 
 		shapes[index] = (Shape)shapeValue;
 		index++;
